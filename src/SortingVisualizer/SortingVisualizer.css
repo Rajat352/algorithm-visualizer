@@ -1,0 +1,17 @@
+body {
+  margin: 0;
+}
+
+.bars-container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.bars {
+  flex: 1 1;
+  background-color: blue;
+  display: inline-block;
+  margin: 0 1px;
+}
