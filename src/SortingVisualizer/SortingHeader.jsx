@@ -1,5 +1,5 @@
 export default function SortingHeader(props) {
-  const { generateArray, numberOfBars, setNumberOfBars } = props;
+  const { generateArray, numberOfBars, setNumberOfBars, mergeSort } = props;
 
   const changeNumberOfBars = (event) => {
     setNumberOfBars(Number(event.target.value));
@@ -20,6 +20,10 @@ export default function SortingHeader(props) {
         onChange={changeNumberOfBars}
         style={{ backgroundColor: "white", cursor: "pointer" }}
       />
+      <button>Bubble Sort</button>
+      <button onClick={mergeSort}>Merge Sort</button>
+      <button>Insertion Sort</button>
+      <button>Selection Sort</button>
     </div>
   );
 }

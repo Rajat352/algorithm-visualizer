@@ -11,7 +11,22 @@ body {
 
 .bars {
   flex: 1 1;
-  background-color: blue;
+  /*background-color: blue;*/
   display: inline-block;
   margin: 0 1px;
+}
+
+.header-container {
+  background-color: #34495e;
+  height: 70px;
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  cursor: pointer;
+}
+
+label {
+  padding-top: 26px;
 }
