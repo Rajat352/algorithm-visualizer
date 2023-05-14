@@ -2,12 +2,12 @@ import "./SortingVisualizer.css";
 import SortingHeader from "./SortingHeader";
 import bubbleSort from "../SortingAlgorithms/bubbleSort";
 import { getMergeSortAnimations } from "../SortingAlgorithms/mergeSort";
+import selectionSort from "../SortingAlgorithms/selectionSort";
 
 import { useEffect, useState, useRef } from "react";
 
 export default function SortingVisualizer() {
   const [array, setArray] = useState([]);
-
   const [numberOfBars, setNumberOfBars] = useState(70);
 
   useEffect(() => {
@@ -61,7 +61,6 @@ export default function SortingVisualizer() {
     }
     const move = moves.shift();
     const [i, j] = move.indices;
-    console.log(i, j);
 
     if (move.type == "swap") {
       setArray((prevArray) => {
@@ -86,6 +85,41 @@ export default function SortingVisualizer() {
     }, ANIMATION_SPEED_MS);
   }
 
+  const selectionSortArray = () => {
+    const moves = selectionSort([...array]);
+    animateSelectionSort(moves);
+  };
+
+  function animateSelectionSort(moves) {
+    if (moves.length == 0) {
+      return;
+    }
+
+    const move = moves.shift();
+    const [i, j] = move.indices;
+
+    if (move.type == "swap") {
+      setArray((prevArray) => {
+        const newArray = [...prevArray];
+        [newArray[j], newArray[i]] = [newArray[i], newArray[j]];
+        return newArray;
+      });
+    }
+
+    const thisBar = document.getElementsByClassName("bars");
+
+    const color = move.type == "swap" ? SECONDARY_COLOR : "blue";
+
+    thisBar[i].style.backgroundColor = color;
+    thisBar[j].style.backgroundColor = color;
+
+    setTimeout(() => {
+      thisBar[i].style.backgroundColor = PRIMARY_COLOR;
+      thisBar[j].style.backgroundColor = PRIMARY_COLOR;
+      animateSelectionSort(moves);
+    }, ANIMATION_SPEED_MS);
+  }
+
   return (
     <div>
       <SortingHeader
@@ -94,6 +128,7 @@ export default function SortingVisualizer() {
         setNumberOfBars={setNumberOfBars}
         bubbleSort={bubbleSortArray}
         mergeSort={mergeSort}
+        selectionSort={selectionSortArray}
       />
       <div className="bars-container">
         {array.map((value, index) => (
