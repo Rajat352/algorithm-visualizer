@@ -1,15 +1,14 @@
-function bubbleSort(arr) {
-  const len = arr.length;
-  for (let i = 0; i < len; i++) {
-    for (let j = 0; j < len - i - 1; j++) {
-      if (arr[j] > arr[j + 1]) {
-        let tmp = arr[j];
-        arr[j] = arr[j + 1];
-        arr[j + 1] = tmp;
+export default function bubbleSort(array) {
+  const swaps=[];
+  do{
+    var swapped = false;
+    for(let i =0; i<array.length; i++){
+      if(array[i]>array[i+1]){
+        swapped = true;
+        swaps.push([i,i+1]);
+        [array[i], array[i+1]] = [array[i+1], array[i]]
       }
     }
-  }
-  return arr;
+  }while(swapped)
+  return swaps;
 }
-
-export default bubbleSort;

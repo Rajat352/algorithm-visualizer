@@ -17,17 +17,14 @@ export default function SortingVisualizer() {
   const generateRandomArray = () => {
     const randomArray = [];
     for (let i = 0; i < numberOfBars; i++) {
-      randomArray.push(randomIntegerFromInterval(10, 700));
+      randomArray.push(randomIntegerFromInterval(10, 500));
     }
     setArray(randomArray);
   };
 
-  const numBars = array.length;
-  const barWidth = 100 / numBars;
-
   const SECONDARY_COLOR = "red";
   const ANIMATION_SPEED_MS = 10;
-  const PRIMARY_COLOR = "turquoise";
+  const PRIMARY_COLOR = "black";
 
   function mergeSort() {
     const animations = getMergeSortAnimations(array);
@@ -53,12 +50,31 @@ export default function SortingVisualizer() {
     }
   }
 
+  const bubbleSortArray = () => {
+    const swaps = bubbleSort([...array]);
+    animateBubbleSort(swaps);
+  };
+
+  function animateBubbleSort(swaps) {
+    if (swaps.length == 0) {
+      return;
+    }
+    const [i, j] = swaps.shift();
+    setArray((prevArray) => {
+      const newArray = [...prevArray];
+      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+      return newArray;
+    });
+    setTimeout(() => animateBubbleSort(swaps), ANIMATION_SPEED_MS);
+  }
+
   return (
     <div>
       <SortingHeader
         generateArray={generateRandomArray}
         numberOfBars={numberOfBars}
         setNumberOfBars={setNumberOfBars}
+        bubbleSort={bubbleSortArray}
         mergeSort={mergeSort}
       />
       <div className="bars-container">
@@ -68,7 +84,7 @@ export default function SortingVisualizer() {
             key={index}
             style={{
               height: `${value}px`,
-              width: `${barWidth}`,
+              width: `${100 / numberOfBars}`,
               backgroundColor: PRIMARY_COLOR,
             }}
           ></div>
