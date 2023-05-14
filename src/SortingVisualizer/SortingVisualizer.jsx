@@ -3,7 +3,7 @@ import SortingHeader from "./SortingHeader";
 import bubbleSort from "../SortingAlgorithms/bubbleSort";
 import { getMergeSortAnimations } from "../SortingAlgorithms/mergeSort";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function SortingVisualizer() {
   const [array, setArray] = useState([]);
@@ -23,7 +23,7 @@ export default function SortingVisualizer() {
   };
 
   const SECONDARY_COLOR = "red";
-  const ANIMATION_SPEED_MS = 10;
+  const ANIMATION_SPEED_MS = 20;
   const PRIMARY_COLOR = "black";
 
   function mergeSort() {
@@ -51,21 +51,39 @@ export default function SortingVisualizer() {
   }
 
   const bubbleSortArray = () => {
-    const swaps = bubbleSort([...array]);
-    animateBubbleSort(swaps);
+    const moves = bubbleSort([...array]);
+    animateBubbleSort(moves);
   };
 
-  function animateBubbleSort(swaps) {
-    if (swaps.length == 0) {
+  function animateBubbleSort(moves) {
+    if (moves.length == 0) {
       return;
     }
-    const [i, j] = swaps.shift();
-    setArray((prevArray) => {
-      const newArray = [...prevArray];
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-      return newArray;
-    });
-    setTimeout(() => animateBubbleSort(swaps), ANIMATION_SPEED_MS);
+    const move = moves.shift();
+    const [i, j] = move.indices;
+    console.log(i, j);
+
+    if (move.type == "swap") {
+      setArray((prevArray) => {
+        const newArray = [...prevArray];
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        return newArray;
+      });
+    }
+
+    const thisBar = document.getElementsByClassName("bars");
+    // Set the backgroundColor of the bars for the compared elements
+    const color = move.type == "swap" ? SECONDARY_COLOR : "blue";
+
+    thisBar[i].style.backgroundColor = color;
+    thisBar[j].style.backgroundColor = color;
+
+    setTimeout(() => {
+      // Set the backgroundColor of the bars back to the default color
+      thisBar[i].style.backgroundColor = PRIMARY_COLOR;
+      thisBar[j].style.backgroundColor = PRIMARY_COLOR;
+      animateBubbleSort(moves);
+    }, ANIMATION_SPEED_MS);
   }
 
   return (
