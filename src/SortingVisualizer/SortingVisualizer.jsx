@@ -3,8 +3,9 @@ import SortingHeader from "./SortingHeader";
 import bubbleSort from "../SortingAlgorithms/bubbleSort";
 import { getMergeSortAnimations } from "../SortingAlgorithms/mergeSort";
 import selectionSort from "../SortingAlgorithms/selectionSort";
+import insertionSort from "../SortingAlgorithms/insertionSort";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function SortingVisualizer() {
   const [array, setArray] = useState([]);
@@ -120,6 +121,41 @@ export default function SortingVisualizer() {
     }, ANIMATION_SPEED_MS);
   }
 
+  const insertionSortArray = () => {
+    const moves = insertionSort([...array]);
+    animateInsertionSort(moves);
+  };
+
+  function animateInsertionSort(moves) {
+    if (moves.length == 0) {
+      return;
+    }
+
+    const move = moves.shift();
+    const [i, j] = move.indices;
+
+    if (move.type == "swap") {
+      setArray((prevArray) => {
+        const newArray = [...prevArray];
+        [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        return newArray;
+      });
+    }
+
+    const thisBar = document.getElementsByClassName("bars");
+
+    const color = move.type == "swap" ? SECONDARY_COLOR : "blue";
+
+    thisBar[i].style.backgroundColor = color;
+    thisBar[j].style.backgroundColor = color;
+
+    setTimeout(() => {
+      thisBar[i].style.backgroundColor = PRIMARY_COLOR;
+      thisBar[j].style.backgroundColor = PRIMARY_COLOR;
+      animateInsertionSort(moves);
+    }, ANIMATION_SPEED_MS);
+  }
+
   return (
     <div>
       <SortingHeader
@@ -129,6 +165,7 @@ export default function SortingVisualizer() {
         bubbleSort={bubbleSortArray}
         mergeSort={mergeSort}
         selectionSort={selectionSortArray}
+        insertionSort={insertionSortArray}
       />
       <div className="bars-container">
         {array.map((value, index) => (
