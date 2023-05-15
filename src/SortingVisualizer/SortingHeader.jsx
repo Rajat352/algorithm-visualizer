@@ -42,7 +42,6 @@ export default function SortingHeader(props) {
           onChange={(e) => setAnimationSpeed(parseInt(e.target.value))}
         />
       </div>
-
       <div onClick={bubbleSort}>Bubble Sort</div>
       <div onClick={mergeSort}>Merge Sort</div>
       <div onClick={insertionSort}>Insertion Sort</div>

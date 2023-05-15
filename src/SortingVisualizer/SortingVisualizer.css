@@ -3,11 +3,26 @@ body {
   font-family: monospace;
 }
 
+.body-container {
+  display: flex;
+}
+
 .bars-container {
   display: flex;
   justify-content: center;
   width: 60%;
   margin: 0 auto;
+}
+
+#code-container {
+  padding-top: 50px;
+  font-size: 16px;
+  width: 300px;
+}
+
+.comp-container {
+  font-size: 20px;
+  width: 300px;
 }
 
 .bars {
@@ -30,6 +45,10 @@ body {
   color: white;
   font-size: 20px;
   font-weight: bold;
+}
+
+.header-container > div:active {
+  color: rgba(169, 92, 232, 0.8);
 }
 
 label {

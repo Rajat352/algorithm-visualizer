@@ -30,9 +30,16 @@ export default function SortingVisualizer() {
   const TERTIARY_COLOR = "coral";
 
   function mergeSort() {
-    const animations = getMergeSortAnimations(array);
+    const [animations, pseudoCode] = getMergeSortAnimations(array);
     for (let i = 0; i < animations.length; i++) {
       const arrayBars = document.getElementsByClassName("bars");
+
+      const existingText = document.getElementById("code-container").innerHTML;
+      if (existingText == "<u>PSEUDOCODE:</u>") {
+        document.getElementById("code-container").innerHTML =
+          existingText + "<pre>" + pseudoCode + "</pre>";
+      }
+
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
         const [barOneIdx, barTwoIdx] = animations[i];
@@ -54,14 +61,19 @@ export default function SortingVisualizer() {
   }
 
   const bubbleSortArray = () => {
-    const moves = bubbleSort([...array]);
-    animateBubbleSort(moves);
+    const [moves, pseudoCode] = bubbleSort([...array]);
+    animateBubbleSort(moves, pseudoCode);
   };
 
-  function animateBubbleSort(moves) {
+  function animateBubbleSort(moves, pseudoCode = "") {
     if (moves.length == 0) {
       return;
     }
+
+    const existingText = document.getElementById("code-container").innerHTML;
+    document.getElementById("code-container").innerHTML =
+      existingText + "<pre>" + pseudoCode + "</pre>";
+
     const move = moves.shift();
     const [i, j] = move.indices;
 
@@ -89,14 +101,18 @@ export default function SortingVisualizer() {
   }
 
   const selectionSortArray = () => {
-    const moves = selectionSort([...array]);
-    animateSelectionSort(moves);
+    const [moves, pseudoCode] = selectionSort([...array]);
+    animateSelectionSort(moves, pseudoCode);
   };
 
-  function animateSelectionSort(moves) {
+  function animateSelectionSort(moves, pseudoCode = "") {
     if (moves.length == 0) {
       return;
     }
+
+    const existingText = document.getElementById("code-container").innerHTML;
+    document.getElementById("code-container").innerHTML =
+      existingText + "<pre>" + pseudoCode + "</pre>";
 
     const move = moves.shift();
     const [i, j] = move.indices;
@@ -124,14 +140,18 @@ export default function SortingVisualizer() {
   }
 
   const insertionSortArray = () => {
-    const moves = insertionSort([...array]);
-    animateInsertionSort(moves);
+    const [moves, pseudoCode] = insertionSort([...array]);
+    animateInsertionSort(moves, pseudoCode);
   };
 
-  function animateInsertionSort(moves) {
+  function animateInsertionSort(moves, pseudoCode = "") {
     if (moves.length == 0) {
       return;
     }
+
+    const existingText = document.getElementById("code-container").innerHTML;
+    document.getElementById("code-container").innerHTML =
+      existingText + "<pre>" + pseudoCode + "</pre>";
 
     const move = moves.shift();
     const [i, j] = move.indices;
@@ -171,18 +191,24 @@ export default function SortingVisualizer() {
         animationSpeed={animationSpeed}
         setAnimationSpeed={setAnimationSpeed}
       />
-      <div className="bars-container">
-        {array.map((value, index) => (
-          <div
-            className="bars"
-            key={index}
-            style={{
-              height: `${value}px`,
-              width: `${100 / numberOfBars}`,
-              backgroundColor: PRIMARY_COLOR,
-            }}
-          ></div>
-        ))}
+      <div className="body-container">
+        <div id="code-container">
+          <u>PSEUDOCODE:</u>
+        </div>
+        <div className="bars-container">
+          {array.map((value, index) => (
+            <div
+              className="bars"
+              key={index}
+              style={{
+                height: `${value}px`,
+                width: `${100 / numberOfBars}`,
+                backgroundColor: PRIMARY_COLOR,
+              }}
+            ></div>
+          ))}
+        </div>
+        <div className="color-container"></div>
       </div>
     </div>
   );

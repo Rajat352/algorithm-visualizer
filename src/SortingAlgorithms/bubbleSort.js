@@ -1,5 +1,16 @@
 export default function bubbleSort(array) {
   const moves = [];
+  const pseudoCode = `
+begin BubbleSort(list)
+
+  for all elements of list
+      if list[i] > list[i+1]
+        swap(list[i], list[i+1])
+      end if
+  end for
+    
+    return list
+end BubbleSort`;
   do {
     var swapped = false;
     for (let i = 1; i < array.length; i++) {
@@ -11,5 +22,5 @@ export default function bubbleSort(array) {
       }
     }
   } while (swapped);
-  return moves;
+  return [moves, pseudoCode];
 }
