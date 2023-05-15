@@ -40,6 +40,22 @@ export default function SortingVisualizer() {
           existingText + "<pre>" + pseudoCode + "</pre>";
       }
 
+      const currW = document.getElementById("worst-case").innerHTML;
+      if (currW == "Worst Case: ") {
+        document.getElementById("worst-case").innerHTML = currW + "O(n log(n))";
+      }
+
+      const currA = document.getElementById("average-case").innerHTML;
+      if (currA == "Average Case: ") {
+        document.getElementById("average-case").innerHTML =
+          currA + "θ(n log(n))";
+      }
+
+      const currB = document.getElementById("best-case").innerHTML;
+      if (currB == "Best Case: ") {
+        document.getElementById("best-case").innerHTML = currW + "Ω(n log(n))";
+      }
+
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
         const [barOneIdx, barTwoIdx] = animations[i];
@@ -73,6 +89,21 @@ export default function SortingVisualizer() {
     const existingText = document.getElementById("code-container").innerHTML;
     document.getElementById("code-container").innerHTML =
       existingText + "<pre>" + pseudoCode + "</pre>";
+
+    const currW = document.getElementById("worst-case").innerHTML;
+    if (currW == "Worst Case: ") {
+      document.getElementById("worst-case").innerHTML = currW + "O(n ^ 2)";
+    }
+
+    const currA = document.getElementById("average-case").innerHTML;
+    if (currA == "Average Case: ") {
+      document.getElementById("average-case").innerHTML = currA + "θ(n^2)";
+    }
+
+    const currB = document.getElementById("best-case").innerHTML;
+    if (currB == "Best Case: ") {
+      document.getElementById("best-case").innerHTML = currW + "Ω(n)";
+    }
 
     const move = moves.shift();
     const [i, j] = move.indices;
@@ -114,6 +145,21 @@ export default function SortingVisualizer() {
     document.getElementById("code-container").innerHTML =
       existingText + "<pre>" + pseudoCode + "</pre>";
 
+    const currW = document.getElementById("worst-case").innerHTML;
+    if (currW == "Worst Case: ") {
+      document.getElementById("worst-case").innerHTML = currW + "O(n ^ 2)";
+    }
+
+    const currA = document.getElementById("average-case").innerHTML;
+    if (currA == "Average Case: ") {
+      document.getElementById("average-case").innerHTML = currA + "θ(n^2)";
+    }
+
+    const currB = document.getElementById("best-case").innerHTML;
+    if (currB == "Best Case: ") {
+      document.getElementById("best-case").innerHTML = currW + "Ω(n^2)";
+    }
+
     const move = moves.shift();
     const [i, j] = move.indices;
 
@@ -152,6 +198,21 @@ export default function SortingVisualizer() {
     const existingText = document.getElementById("code-container").innerHTML;
     document.getElementById("code-container").innerHTML =
       existingText + "<pre>" + pseudoCode + "</pre>";
+
+    const currW = document.getElementById("worst-case").innerHTML;
+    if (currW == "Worst Case: ") {
+      document.getElementById("worst-case").innerHTML = currW + "O(n ^ 2)";
+    }
+
+    const currA = document.getElementById("average-case").innerHTML;
+    if (currA == "Average Case: ") {
+      document.getElementById("average-case").innerHTML = currA + "θ(n^2)";
+    }
+
+    const currB = document.getElementById("best-case").innerHTML;
+    if (currB == "Best Case: ") {
+      document.getElementById("best-case").innerHTML = currW + "Ω(n)";
+    }
 
     const move = moves.shift();
     const [i, j] = move.indices;
@@ -208,7 +269,12 @@ export default function SortingVisualizer() {
             ></div>
           ))}
         </div>
-        <div className="color-container"></div>
+        <div className="comp-container">
+          <u>TIME COMPLEXITY:</u>
+          <div id="worst-case">Worst Case: </div>
+          <div id="average-case">Average Case: </div>
+          <div id="best-case">Best Case: </div>
+        </div>
       </div>
     </div>
   );
