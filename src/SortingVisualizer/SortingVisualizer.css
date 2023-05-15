@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  font-family: monospace;
 }
 
 .bars-container {
@@ -18,15 +19,27 @@ body {
 
 .header-container {
   background-color: #34495e;
-  height: 70px;
+  height: 120px;
   display: flex;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-container > div {
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+label {
+  color: white;
+}
+
+input {
+  cursor: pointer;
 }
 
 button {
   cursor: pointer;
-}
-
-label {
-  padding-top: 26px;
 }

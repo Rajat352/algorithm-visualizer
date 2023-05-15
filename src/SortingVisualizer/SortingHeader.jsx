@@ -7,6 +7,8 @@ export default function SortingHeader(props) {
     mergeSort,
     selectionSort,
     insertionSort,
+    animationSpeed,
+    setAnimationSpeed,
   } = props;
 
   const changeNumberOfBars = (event) => {
@@ -15,23 +17,36 @@ export default function SortingHeader(props) {
 
   return (
     <div className="header-container">
-      <button onClick={generateArray} className="generate-new-array-btn">
+      <div onClick={generateArray} className="generate-new-array-btn">
         Generate New Array
-      </button>
-      <label htmlFor="change-size">Change Array Size: </label>
-      <input
-        id="change-size"
-        type="range"
-        min={5}
-        max={100}
-        value={numberOfBars}
-        onChange={changeNumberOfBars}
-        style={{ backgroundColor: "white", cursor: "pointer" }}
-      />
-      <button onClick={bubbleSort}>Bubble Sort</button>
-      <button onClick={mergeSort}>Merge Sort</button>
-      <button onClick={insertionSort}>Insertion Sort</button>
-      <button onClick={selectionSort}>Selection Sort</button>
+      </div>
+      <div>
+        <label htmlFor="change-size">Change Array Size:</label>
+        <input
+          id="change-size"
+          type="range"
+          min={5}
+          max={100}
+          value={numberOfBars}
+          onChange={changeNumberOfBars}
+        />
+      </div>
+      <div>
+        <label htmlFor="change-animation-speed">Change Animation Speed:</label>
+        <input
+          id="change-animation-speed"
+          type="range"
+          min="20"
+          max="900"
+          value={animationSpeed}
+          onChange={(e) => setAnimationSpeed(parseInt(e.target.value))}
+        />
+      </div>
+
+      <div onClick={bubbleSort}>Bubble Sort</div>
+      <div onClick={mergeSort}>Merge Sort</div>
+      <div onClick={insertionSort}>Insertion Sort</div>
+      <div onClick={selectionSort}>Selection Sort</div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function SortingVisualizer() {
   const [array, setArray] = useState([]);
   const [numberOfBars, setNumberOfBars] = useState(70);
+  const [animationSpeed, setAnimationSpeed] = useState(500);
 
   useEffect(() => {
     generateRandomArray();
@@ -23,9 +24,10 @@ export default function SortingVisualizer() {
     setArray(randomArray);
   };
 
-  const SECONDARY_COLOR = "red";
-  const ANIMATION_SPEED_MS = 20;
-  const PRIMARY_COLOR = "black";
+  const ANIMATION_SPEED_MS = animationSpeed;
+  const PRIMARY_COLOR = "rgba(169, 92, 232, 0.8)";
+  const SECONDARY_COLOR = "lightgreen";
+  const TERTIARY_COLOR = "coral";
 
   function mergeSort() {
     const animations = getMergeSortAnimations(array);
@@ -73,7 +75,7 @@ export default function SortingVisualizer() {
 
     const thisBar = document.getElementsByClassName("bars");
     // Set the backgroundColor of the bars for the compared elements
-    const color = move.type == "swap" ? SECONDARY_COLOR : "blue";
+    const color = move.type == "swap" ? SECONDARY_COLOR : TERTIARY_COLOR;
 
     thisBar[i].style.backgroundColor = color;
     thisBar[j].style.backgroundColor = color;
@@ -109,7 +111,7 @@ export default function SortingVisualizer() {
 
     const thisBar = document.getElementsByClassName("bars");
 
-    const color = move.type == "swap" ? SECONDARY_COLOR : "blue";
+    const color = move.type == "swap" ? SECONDARY_COLOR : TERTIARY_COLOR;
 
     thisBar[i].style.backgroundColor = color;
     thisBar[j].style.backgroundColor = color;
@@ -144,7 +146,7 @@ export default function SortingVisualizer() {
 
     const thisBar = document.getElementsByClassName("bars");
 
-    const color = move.type == "swap" ? SECONDARY_COLOR : "blue";
+    const color = move.type == "swap" ? SECONDARY_COLOR : TERTIARY_COLOR;
 
     thisBar[i].style.backgroundColor = color;
     thisBar[j].style.backgroundColor = color;
@@ -166,6 +168,8 @@ export default function SortingVisualizer() {
         mergeSort={mergeSort}
         selectionSort={selectionSortArray}
         insertionSort={insertionSortArray}
+        animationSpeed={animationSpeed}
+        setAnimationSpeed={setAnimationSpeed}
       />
       <div className="bars-container">
         {array.map((value, index) => (
