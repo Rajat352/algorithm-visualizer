@@ -2,6 +2,8 @@
 
 A simple web application showcasing the inner workings of various sorting algorithms.
 
+Deployment Link: https://rajat352.github.io/algorithm-visualizer/
+
 Currently Implemented Algorithms:
 
 1. Bubble Sort
